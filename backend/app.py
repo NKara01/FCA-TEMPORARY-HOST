@@ -23,4 +23,4 @@ register_routes(app, db)
 stripe.api_key = os.getenv("STRIPE_SECRET_KEY")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=False)
