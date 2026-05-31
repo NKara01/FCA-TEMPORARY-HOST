@@ -8,3 +8,4 @@ stripe==15.2.0
 validators==0.35.0
 Werkzeug==3.1.8
 gunicorn
+bcrypt==4.0.1
