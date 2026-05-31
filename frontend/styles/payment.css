@@ -1,0 +1,51 @@
+.payment-page {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2.7rem;
+}
+
+.payment-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    align-items: stretch;
+}
+.payment-card {
+    background:rgba(75, 122, 208, 0.189);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem 2.8rem 1.5rem 2.8rem ;
+    min-width: 400px;
+    /* max-height: 100%;  */
+}
+
+.payment-card h2 {
+    font-family: 'DM Serif Display', serif;
+    margin-bottom: 1.5rem;}
+
+.payment-locked-msg {
+    color: var(--muted);
+    font-size: 14px;
+    text-align: center;
+    padding: 4rem 2rem;
+    border: 1px dashed var(--border);
+    border-radius: 8px;}
+
+.hidden {
+    display: none;}
+
+#payment-element {
+ margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .payment-grid {
+        grid-template-columns: 1fr;
+    }}
+.payment-body {
+    background:
+        radial-gradient(circle at top left, rgba(65, 105, 180, 0.28), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(44, 199, 145, 0.10), transparent 28%),
+        linear-gradient(180deg, #142956 0%, #102349 50%, #0d1d3d 100%);
+    min-height: 100vh;
+}

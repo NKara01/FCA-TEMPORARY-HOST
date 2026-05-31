@@ -1,0 +1,103 @@
+.profile_container {
+    margin: 3rem auto 3rem;
+    width: 75%;
+    padding: 2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap:10%
+}
+
+h1 {
+    margin: 3rem auto 3rem;
+    width: 75%;
+
+}
+
+.profile_container .image_container{
+    width:20%;
+}
+.profile_container .image_container img{
+    width:100%;
+    object-fit: cover;
+    height:auto;
+    aspect-ratio: 1; /* will make width equal to height (500px container) */
+
+}
+.profile_container .detail_container{
+    width:70%;
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    gap:1rem;
+}
+.detail_container .texthorizontal, .detail_container .textvertical{
+    width: 100%;
+}
+.textvertical p {
+    margin-top:10px;
+}
+input {
+    width: auto;
+    height: 40px;
+    background: rgb(255, 255, 255);
+    border: 1px solid var(--navy);
+    border-radius: 8px;
+    padding: 10px 14px;
+    color: var(--navy);
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+    color:var(--navy);
+}
+textarea{
+    width: 100%;
+    min-height: 100px;
+    background: rgb(255, 255, 255);
+    border: 1px solid var(--navy);
+    border-radius: 8px;
+    padding: 10px 14px;
+     margin-top:10px;
+    color: var(--navy);
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    resize: none;
+    color:var(--navy);
+    field-sizing: content; /* used to be `form-sizing` but changed to this */
+}
+
+.texthorizontal{
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    gap: 1rem;
+}
+.textvertical{
+        display:flex;
+    flex-direction: column;
+    flex-wrap:wrap;
+}
+.buttonSet{
+    width: 100%;
+    gap:2rem;
+    display:flex;
+    flex-direction: row;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: center;
+}
+.buttonSet button, .forcebuttonshape{
+    width: 25%;
+    text-decoration: none;
+    text-align: center;
+}
+.profile_container h1 {
+    margin-bottom: 1.5rem;
+}
