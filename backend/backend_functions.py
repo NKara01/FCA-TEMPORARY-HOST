@@ -142,16 +142,55 @@ SENDER_EMAIL = os.getenv("SENDER_EMAIL")
 SENDER_PASSWORD = os.getenv("SENDER_PASSWORD")
 BASE_URL = "http://127.0.0.1:5000"
 
+# def send_verification_email(recipient_email: str, token: str):
+    
+#     link = f"{BASE_URL}/verify_email?token={token}"
+#     # attach email
+#     msg = MIMEMultipart("alternative")
+#     msg["Subject"] = "Verify your Food Computing Academy account"
+#     msg["From"] = SENDER_EMAIL
+#     msg["To"] = recipient_email
+    
+#     # FORMAT WAS ADAPTED FROM A SONICWALL CONFIRMATION EMAIL LMAO
+#     html = f"""
+#     <div style="font-family:sans-serif;max-width:480px;margin:auto;">
+#         <h2>Almost there!</h2>
+#         <p>Click below to verify your email and create your account.
+#            This link expires in <strong>1 hour</strong>.</p>
+           
+#         <a href="{link}" style="display:inline-block;padding:12px 24px;
+#            background:#2d6a4f;color:#fff;border-radius:6px;text-decoration:none;">
+#            Verify Email
+#         </a>
+        
+#         <p style="color:#999;font-size:12px;margin-top:24px;">
+#             If you didn't request this, ignore this email.
+#         </p>
+#     </div>
+#     """
+#     # attach again? email format weird 
+#     # attaches email in container but before attached container i think? 
+#     # puts html inside email container? @NickKaralis to fact check this laterr
+#     msg.attach(MIMEText(html, "html"))
+
+#     # from sonicwall email - will do documentation next commit
+#     with smtplib.SMTP("smtp.hostinger.com", 587, timeout=10) as server:
+#         server.ehlo()
+#         server.starttls()
+#         server.ehlo()
+#         server.login(SENDER_EMAIL, SENDER_PASSWORD)
+#         server.sendmail(SENDER_EMAIL, recipient_email, msg.as_string())
+# NEW: for admin page, i wanted to load recent users or well just users in general
+# since a small webwsite i thought this is a cool inlau
+
 def send_verification_email(recipient_email: str, token: str):
     
     link = f"{BASE_URL}/verify_email?token={token}"
-    # attach email
     msg = MIMEMultipart("alternative")
     msg["Subject"] = "Verify your Food Computing Academy account"
     msg["From"] = SENDER_EMAIL
     msg["To"] = recipient_email
     
-    # FORMAT WAS ADAPTED FROM A SONICWALL CONFIRMATION EMAIL LMAO
     html = f"""
     <div style="font-family:sans-serif;max-width:480px;margin:auto;">
         <h2>Almost there!</h2>
@@ -168,20 +207,19 @@ def send_verification_email(recipient_email: str, token: str):
         </p>
     </div>
     """
-    # attach again? email format weird 
-    # attaches email in container but before attached container i think? 
-    # puts html inside email container? @NickKaralis to fact check this laterr
     msg.attach(MIMEText(html, "html"))
 
-    # from sonicwall email - will do documentation next commit
-    with smtplib.SMTP("smtp.hostinger.com", 587, timeout=10) as server:
-        server.ehlo()
-        server.starttls()
-        server.ehlo()
-        server.login(SENDER_EMAIL, SENDER_PASSWORD)
-        server.sendmail(SENDER_EMAIL, recipient_email, msg.as_string())
-# NEW: for admin page, i wanted to load recent users or well just users in general
-# since a small webwsite i thought this is a cool inlau
+    try:
+        with smtplib.SMTP("smtp.hostinger.com", 587, timeout=10) as server:
+            server.ehlo()
+            server.starttls()
+            server.ehlo()
+            server.login(SENDER_EMAIL, SENDER_PASSWORD)
+            server.sendmail(SENDER_EMAIL, recipient_email, msg.as_string())
+    except Exception as e:
+        print(f"Email failed (SMTP blocked on host): {e}")
+        return False
+    return True
 def get_users(cursor, query=""):
     if query:
         cursor.execute("""
