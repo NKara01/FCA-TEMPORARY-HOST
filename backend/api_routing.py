@@ -1671,6 +1671,7 @@ WHERE articles.title NOT NULL
 GROUP BY articles.id
 ORDER BY articles.created DESC
 LIMIT ? OFFSET ?
+source venv/bin/activate
 
 """
 
@@ -1941,17 +1942,17 @@ WHERE id = ?;
 
                 # EMAIL VERIFICATION 
                 #taken from w3 schools + youtube . references TBA once completed
-                token = secrets.token_urlsafe(32) 
-                session['pending_user'] = {
-                    'first_name': first_name, 'last_name': last_name, 'email': email,
-                    'password_hash': password_hash.decode('utf-8'), 'avatar': avatar_url, 'token': token,
-                    #timeout in seconds 1 hour is 3600
-                    'expires_at': int(time.time()) + 3600 }
-                print(session['pending_user'])
-                
-                send_verification_email(email, token)
-                #close_db()
-                return redirect(url_for('verify_pending'))
+                conn, cursor = get_db()
+                try:
+                    cursor.execute(
+                        "INSERT INTO Users (first_name, last_name, email, password_hash, avatar) VALUES (?, ?, ?, ?, ?)",
+                        (first_name, last_name, email, password_hash, avatar_url))
+                    conn.commit()
+                    close_db()
+                    return redirect(url_for('login'))
+                except Exception:
+                    close_db()
+                    return render_template("create_account.html", error="Email already registered.")
 
 
                 
