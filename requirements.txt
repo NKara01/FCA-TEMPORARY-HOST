@@ -7,3 +7,4 @@ rank_bm25==0.2.2
 stripe==15.2.0
 validators==0.35.0
 Werkzeug==3.1.8
+gunicorn
